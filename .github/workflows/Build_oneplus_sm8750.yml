@@ -346,9 +346,8 @@ jobs:
       - name: 🔧 Add KPM (启用KPM)
         if: ${{inputs.enable_feature_c }}
         run: |
-         info "添加KPM配置..."
-         echo "CONFIG_KPM=y" >> common/arch/arm64/configs/gki_defconfig
-         sudo sed -i 's/check_defconfig//' common/build.config.gki || error "修改build.config.gki失败"
+         echo "CONFIG_KPM=y" >> ./common/arch/arm64/configs/gki_defconfig
+         sudo sed -i 's/check_defconfig//' ./common/build.config.gki || error "修改build.config.gki失败"
 
       - name: 🔨 Build Kernel (构建内核)
         run: |
