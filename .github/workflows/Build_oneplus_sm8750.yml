@@ -69,10 +69,10 @@ jobs:
       - name: ⚙️ Set REPO_MANIFEST (设置对应机型配置文件)
         id: set_manifest
         run: |
-          cp "${GITHUB_WORKSPACE}/.github/workflows/Bin/main.bin" ./
-          chmod +x main.bin
-          ./main.bin "setup_device_info" "${{ github.event.inputs.REPO_MANIFEST }}"
-          rm -rf ./main.bin
+          cp "${GITHUB_WORKSPACE}/.github/workflows/Bin/Bin.sh" ./
+          chmod +x Bin.sh
+          ./Bin.sh "setup_device_info" "${{ github.event.inputs.REPO_MANIFEST }}"
+          rm -rf ./Bin.sh
           
       - name: ⚙️ Set KERNEL_TIME (设置构建时间)
         id: set_kernel_time
@@ -233,10 +233,10 @@ jobs:
                     fi
                 done
             
-                cp "${GITHUB_WORKSPACE}/.github/workflows/Bin/main.bin" ./
-                chmod +x main.bin
-                ./main.bin "setup_lz4"
-                rm -rf ./main.bin
+                cp "${GITHUB_WORKSPACE}/.github/workflows/Bin/Bin.sh" ./
+                chmod +x Bin.sh
+                ./Bin.sh "setup_lz4"
+                rm -rf ./Bin.sh
             fi
             
             if [ "${REPO_MANIFEST}" != "oneplus_13t" ] && [ "${REPO_MANIFEST}" != "oneplus_ace5_ultra" ] && [ "${REPO_MANIFEST}" != "oneplus_pad_2_pro" ]; then
@@ -282,10 +282,10 @@ jobs:
           ENABLE_B: ${{ github.event.inputs.enable_feature_b }}       
         run: |
           cd kernel_workspace/kernel_platform
-          cp "${GITHUB_WORKSPACE}/.github/workflows/Bin/main.bin" ./
-          chmod +x main.bin
-          ./main.bin "setup_gki_config"
-          rm -rf ./main.bin
+          cp "${GITHUB_WORKSPACE}/.github/workflows/Bin/Bin.sh" ./
+          chmod +x Bin.sh
+          ./Bin.sh "setup_gki_config"
+          rm -rf ./Bin.sh
           #Remove check_defconfig
           sudo sed -i 's/check_defconfig//' ./common/build.config.gki
           cd common
@@ -330,7 +330,7 @@ jobs:
             echo "保持原内核名称设置"
           fi
           ESCAPED_SUFFIX=$(printf '%s\n' "$DEFAULT_SUFFIX" | sed 's:[\/&]:\\&:g')
-          cp "${GITHUB_WORKSPACE}/.github/workflows/Bin/main.bin" ./
+          cp "${GITHUB_WORKSPACE}/.github/workflows/Bin/Bin.sh" ./
           sudo sed -i "s/-4k/$ESCAPED_SUFFIX/g" ./common/arch/arm64/configs/gki_defconfig
           sed -i 's/${scm_version}//' ./common/scripts/setlocalversion
           
@@ -365,10 +365,10 @@ jobs:
        
       - name: 📦 Make AnyKernel3 (创建Anykernel3)
         run: |
-          cp "${GITHUB_WORKSPACE}/.github/workflows/Bin/main.bin" ./
-          chmod +x main.bin
-          ./main.bin "make_anykernel3"
-          rm -rf ./main.bin
+          cp "${GITHUB_WORKSPACE}/.github/workflows/Bin/Bin.sh" ./
+          chmod +x Bin.sh
+          ./Bin.sh "make_anykernel3"
+          rm -rf ./Bin.sh
           
       - name: 📤 Upload AnyKernel3 (上传 Anykernel3)
         uses: actions/upload-artifact@v4
